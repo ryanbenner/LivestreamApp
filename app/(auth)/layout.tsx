@@ -1,14 +1,12 @@
 import React from 'react'
-
-const AuthLayout = ({children} : {children: React.ReactNode;}) => {
+import { Logo } from "./_components/logo"
+const layout = ({children}: {children: React.ReactNode}) => {
   return (
-    <div className='flex flex-col gap-y-4'>
-        <nav className='bg-red-500 w-full'>
-            Auth Nav
-        </nav>
+    <div className='h-full flex flex-col items-center justify-center space-y-6'>
+        <Logo />
         {children}
     </div>
   )
 }
 
-export default AuthLayout;
+export default layout;
