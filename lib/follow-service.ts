@@ -2,6 +2,43 @@ import { db } from "@/lib/db";
 import { getSelf } from "@/lib/auth_service";
 import { get } from "http";
 
+export const getFollowedUsers = async() => {
+    try {
+        const self = await getSelf();
+
+        const followedUsers = db.follow.findMany({
+            where: {
+                followerId: self.id,
+                following: {
+                    OR: [
+                        {
+                          blocking: {
+                            none: {
+                              blockingId: self.id,
+                            },
+                          },
+                        },
+                        {
+                          blockedBy: {
+                            none: {
+                              blockedById: self.id,
+                            },
+                          },
+                        },
+                      ],
+                },
+            },
+            include: {
+                following: true,
+            },
+        });
+
+        return followedUsers;
+    } catch {
+        return [];
+    }
+};
+
 export const isFollowingUser = async (id: string) => {
     try{
         const self = await getSelf();
