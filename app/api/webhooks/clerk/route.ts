@@ -3,6 +3,7 @@ import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
 
 import { db} from '@/lib/db'
+import { Stream } from '@prisma/client'
 
 export async function POST(req: Request) {
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET
@@ -56,9 +57,14 @@ export async function POST(req: Request) {
             externalUserId: payload.data.id,
             username: payload.data.username,
             imageUrl: payload.data.image_url,
-        }
-    })
-  }
+            Stream: {
+              create: {
+                name: `${payload.data.username}'s stream`,
+              },
+            },
+        },
+    });
+  };
 
   if (eventType === "user.updated") {
     const currentUser = await db.user.findUnique({
