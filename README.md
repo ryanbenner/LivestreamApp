@@ -2,6 +2,7 @@
 
 This is the project directory for a full stack twitch clone. Different technologies being utilized include Next.js, React.js, TailwindCSS, Clerk (authentication), PostgreSQL through prisma, and more.
 
+<img width="1440" height="895" alt="image" src="https://github.com/user-attachments/assets/58016bc5-b934-4e93-b173-8e177047e47c" />
 
 
 ## Run Instructions
