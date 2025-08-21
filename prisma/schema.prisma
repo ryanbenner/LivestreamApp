@@ -30,7 +30,7 @@ model user {
   blocking  Block[] @relation("Blocking")
   blockedBy Block[] @relation("BlockedBy")
 
-  Stream Stream[]
+  Stream Stream?
 }
 
 model Stream {

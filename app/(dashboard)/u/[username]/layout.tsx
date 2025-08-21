@@ -1,3 +1,5 @@
+export const dynamicParams = true;
+
 import { getSelfByUsername } from "@/lib/auth_service";
 import { redirect } from "next/navigation";
 
