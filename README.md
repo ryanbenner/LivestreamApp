@@ -15,3 +15,7 @@ Built on:
 Build: 
 
 * npm run dev
+
+Other Commands:
+
+* npx prisma studio
