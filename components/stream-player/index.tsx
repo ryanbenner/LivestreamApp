@@ -11,11 +11,19 @@ import { LayoutContextProvider } from "@livekit/components-react";
 import { ChatToggle } from "./chat-toggle";
 import { Header, HeaderSkeleton } from "./header";
 import { InfoCard } from "./info-card";
+import { AboutCard } from "./about-card";
+
+type ExtendedUser = Omit<user, 'stream'> & {
+  stream: Stream | null;
+  _count: {
+    follower: number;
+  };
+};
 
 interface StreamPlayerProps {
-    user: user & {stream: Stream | null};
-    stream: Stream;
-    isFollowing: boolean;
+  user: ExtendedUser;
+  stream: Stream;
+  isFollowing: boolean;
 }
 
 export const StreamPlayer = ({
@@ -72,6 +80,13 @@ export const StreamPlayer = ({
                   viewerIdentity={identity}
                   name={stream.name}
                   thumbnailUrl={stream.thumbnailUrl}
+                />
+                <AboutCard
+                  hostName={user.username}
+                  hostIdentity={user.id}
+                  viewerIdentity={identity}
+                  bio={user.bio}
+                  followedByCount={user._count.follower}
                 />
               </div>
               <div className={cn("col-span-1", collapsed && "hidden")}>
